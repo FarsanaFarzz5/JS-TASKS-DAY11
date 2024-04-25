@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stopwatch</title>
+<style>
+    body{
+        background-color: black;
+        color:white;
+        font-size: 40px;
+        
+        
+    }
+    h1{
+        font-size: 40px;
+        padding-left: -40px;
+        font-family: cursive;
+        margin-top: 10px;
+        text-align: center;
+    }
+    #stopwatch {
+        font-family: Arial, sans-serif;
+        text-align: center;padding-top: 90px;
+    }
+    #display {
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
+    #controls {
+        margin-top: 20px;
+    }
+    button{
+        width: 15%;
+        height: 50px;
+    
+    }
+</style>
+</head>
+<body>
+    <h1>STOP WATCH</h1>
+<div id="stopwatch">
+    <div id="display">00:00:00</div>
+    <div id="controls">
+        <button onclick="startStop()">Start</button>
+        <button onclick="reset()">Reset</button>
+    </div>
+</div>
+
+<script>
+    let timer;
+    let time = 0;
+
+    function startStop() {
+        if (!timer) {
+            timer = setInterval(updateTime, 1000);
+        } else {
+            clearInterval(timer);
+            timer = null;
+        }
+    }
+
+    function updateTime() {
+        time++;
+        let hours = Math.floor(time / 3600);
+        let minutes = Math.floor((time % 3600) / 60);
+        let seconds = time % 60;
+        document.getElementById("display").textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    }
+
+    function pad(num) {
+        return (num < 10 ? "0" : "") + num;
+    }
+
+    function reset() {
+        clearInterval(timer);
+        timer = null;
+        time = 0;
+        document.getElementById("display").textContent = "00:00:00";
+    }
+</script>
+</body>
+</html>
